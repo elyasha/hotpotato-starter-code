@@ -92,7 +92,7 @@
             countDown(clockValue)
             break;
           // 'NEW_POTATO_HOLDER' => updateCurrentPotatoHolder(newPotatoHolderIndex)
-          case 'SERVER.MESSAGE.NEW_POTATO_HOLDER':
+          case 'SERVER.BROADCAST.NEW_POTATO_HOLDER':
             updateCurrentPotatoHolder(payload.newPotatoHolderIndex)
             break;
           // 'GAME_OVER' => endGame()
@@ -126,6 +126,7 @@
       potatoHolderIndex = newPotatoHolderIndex;
       
       // TODO: Send the server a 'PASS_POTATO' message with the newPotatoHolderIndex
+      wsClient.send(JSON.stringify({type: 'CLIENT.MESSAGE.PASS_POTATO', payload: { newPotatoHolderIndex }}))
       
     }
 

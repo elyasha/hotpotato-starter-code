@@ -51,6 +51,8 @@ wsServer.on('connection', (socket) => {
       case 'CLIENT.MESSAGE.NEW_USER':
         handleNewUser(socket)
         break;
+      case 'CLIENT.MESSAGE.PASS_POTATO':
+        passThePotatoTo(payload.newPotatoHolderIndex)
       default:
         break;
     }
@@ -106,7 +108,7 @@ function handleNewUser(socket) {
 
 function passThePotatoTo(newPotatoHolderIndex) {
   // TODO: Broadcast a NEW_POTATO_HOLDER message with the newPotatoHolderIndex
-  
+  broadcast({type: 'SERVER.BROADCAST.NEW_POTATO_HOLDER', payload: { newPotatoHolderIndex }}) 
 }
 
 function startTimer() {
