@@ -88,15 +88,15 @@
             setPlayerIndex(payload.clientPlayerIndex)
             break;
           // 'COUNTDOWN' => countDown(clockValue)
-          case 'SERVER.MESSAGE.COUNTDOWN':
-            countDown(clockValue)
+          case 'SERVER.BROADCAST.COUNTDOWN':
+            countDown(payload.clockValue)
             break;
           // 'NEW_POTATO_HOLDER' => updateCurrentPotatoHolder(newPotatoHolderIndex)
           case 'SERVER.BROADCAST.NEW_POTATO_HOLDER':
             updateCurrentPotatoHolder(payload.newPotatoHolderIndex)
             break;
           // 'GAME_OVER' => endGame()
-          case 'SERVER.MESSAGE.GAME_OVER':
+          case 'SERVER.BROADCAST.GAME_OVER':
             endGame()
             break;
           default:

@@ -48,17 +48,17 @@ wsServer.on('connection', (socket) => {
   socket.on('message', (data) => {
     const {type, payload} = JSON.parse(data)
     switch (type) {
+  // 'NEW_USER' => handleNewUser(socket)
       case 'CLIENT.MESSAGE.NEW_USER':
         handleNewUser(socket)
         break;
+  // 'PASS_POTATO' => passThePotatoTo(newPotatoHolderIndex)
       case 'CLIENT.MESSAGE.PASS_POTATO':
         passThePotatoTo(payload.newPotatoHolderIndex)
       default:
         break;
     }
   })
-  // 'NEW_USER' => handleNewUser(socket)
-  // 'PASS_POTATO' => passThePotatoTo(newPotatoHolderIndex)
 })
 
 
@@ -119,6 +119,7 @@ function startTimer() {
   const interval = setInterval(() => {
     if (clockValue > 0) {
       // TODO: broadcast 'COUNTDOWN' with the clockValue
+      broadcast({type: 'SERVER.BROADCAST.COUNTDOWN', payload: { clockValue: clockValue}})
       
 
       // decrement until the clockValue reaches 0
@@ -131,6 +132,7 @@ function startTimer() {
       nextPlayerIndex = 0; // reset the players index
       
       // TODO: Broadcast 'GAME_OVER'
+      broadcast({type: 'SERVER.BROADCAST.GAME_OVER'})
    
     }
   }, 1000);
